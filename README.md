@@ -46,20 +46,46 @@
 
 ## 快速开始
 
+### 安装与构建
+
+仓库里**不含构建产物**，克隆后先装依赖并构建（CLI 入口就是构建出来的 `dist/cli.cjs`）：
+
 ```bash
 npm install
+npm run build
 ```
 
 ### CLI
 
+构建完成后，三种用法任选：
+
 ```bash
-npx md2any ./note.md                          # → .xmind（与源文件同目录同名）
-npx md2any ./note.md -o ./out/note.xmind      # 指定输出路径
-npx md2any ./note.md --root-title "读书笔记"   # 指定中心主题名
-npx md2any ./note.md -f png -o ./out/note.png # 导出 PNG / PDF
-npx md2any ./note.md --dry-run                # 只打印 IR，不写文件
-npx md2any ./out/note.xmind --reverse -o ./note.md  # 反向：.xmind → Markdown
+node dist/cli.cjs ./note.md
+npm run dev -- ./note.md
+npm i -g .
+md2any ./note.md
 ```
+
+| 用法 | 说明 |
+| --- | --- |
+| `node dist/cli.cjs` | 直接跑构建产物，最直观 |
+| `npm run dev --` | 用 `tsx` 直跑源码，改完即生效、免构建 |
+| `npm i -g .` | 装成全局命令，之后直接用 `md2any` |
+
+> `npx md2any` **暂时不可用**：包尚未发布到 npm；而且 npm 不会把「当前项目自己的 `bin`」链接进 `node_modules/.bin`，所以本地也解析不到。
+
+常用示例（默认输出 `.xmind`，与源文件同目录同名；下面用 `md2any` 指代，没做全局安装时把它换成 `node dist/cli.cjs`）：
+
+```bash
+md2any ./note.md
+md2any ./note.md -o ./out/note.xmind
+md2any ./note.md --root-title "读书笔记"
+md2any ./note.md -f png -o ./out/note.png
+md2any ./note.md --dry-run
+md2any ./out/note.xmind --reverse -o ./note.md
+```
+
+上面依次是：默认转 `.xmind`、指定输出路径、替换中心主题名、导出 PNG（换成 `-f pdf` 即导出 PDF）、只打印 IR 不写文件、把 `.xmind` 反向转回 Markdown。
 
 | 参数 | 说明 |
 | --- | --- |
@@ -74,8 +100,15 @@ npx md2any ./out/note.xmind --reverse -o ./note.md  # 反向：.xmind → Markdo
 ### 网页端
 
 ```bash
-npm run dev:web     # 本地开发，默认 http://localhost:5173
-npm run build:web   # 构建静态产物到 web/dist，可作纯前端站点直接部署
+npm run dev:web
+```
+
+然后浏览器打开 **http://localhost:5173/md/** —— 注意末尾的 `/md/` 路径。这是 `web/vite.config.ts` 里 `base: "/md/"` 决定的，直接访问 `http://localhost:5173/` 会 404。
+
+构建静态产物（输出到 `web/dist`，可作纯前端站点直接部署，部署路径同样要对上 `/md/`）：
+
+```bash
+npm run build:web
 ```
 
 界面细节、响应式与触屏适配、iframe 嵌入与宿主导出接管见 **[web/README.md](web/README.md)**。
@@ -123,11 +156,23 @@ IR → export/json → JSON
 ## 开发
 
 ```bash
-npm test           # Vitest 全量测试
-npm run typecheck  # tsc --noEmit（核心 + web）
-npm run build      # tsup 打包（cjs + esm + d.ts）
-npm run build:web  # 构建前端静态产物
+npm test
+npm run typecheck
+npm run build
+npm run build:web
+npm run verify
 ```
+
+| 命令 | 作用 |
+| --- | --- |
+| `npm test` | Vitest 全量测试 |
+| `npm run typecheck` | `tsc --noEmit`（核心 + web） |
+| `npm run build` | tsup 打包（cjs + esm + d.ts） |
+| `npm run build:web` | 构建前端静态产物 |
+| `npm run smoke` | 冒烟：加载 `dist/cli.cjs`，确认构建产物能跑起来 |
+| `npm run verify` | 上面全跑一遍（类型 + 测试 + 构建 + 冒烟） |
+
+> 冒烟这一步不是摆设：`unified` / `remark-*` 这类 ESM-only 依赖打成 CJS 后，`default` 导出会被多包一层，**源码直跑正常、构建产物直接崩**。`npm publish` 前会自动跑 `npm run build && npm run smoke` 挡住这种回归。
 
 | 用途 | 依赖 |
 | --- | --- |

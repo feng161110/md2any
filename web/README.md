@@ -3,10 +3,20 @@
 Vite 前端，复用 `../src` 的核心库（别名 `@core`）。这是项目的两个入口之一：**在浏览器里编辑 Markdown、实时预览、所见即所得导出**。
 
 ```bash
-npm run dev:web     # 开发服务器，默认 http://localhost:5173
-npm run build:web   # 构建静态产物到 web/dist，可作纯前端站点直接部署
-npm run preview:web # 预览构建产物
+npm run dev:web
+npm run build:web
+npm run preview:web
 ```
+
+| 命令 | 作用 |
+| --- | --- |
+| `npm run dev:web` | 开发服务器 |
+| `npm run build:web` | 构建静态产物到 `web/dist`，可作纯前端站点直接部署 |
+| `npm run preview:web` | 本地预览构建产物 |
+
+> **访问地址是 http://localhost:5173/md/**，末尾的 `/md/` 不能少 —— `vite.config.ts` 里 `base: "/md/"`，直接开根路径会 404。部署时站点也要挂在 `/md/` 下。
+
+> 从 README 复制命令时注意别把行尾注释一起粘进去：Windows 上 `npm run` 走 cmd，`#` 不是注解字符，会被当成参数传给脚本（典型症状是 Vite 报 `The project root contains the "#" character`）。
 
 ## 目录
 

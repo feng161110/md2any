@@ -4,10 +4,29 @@ import remarkGfm from "remark-gfm";
 import remarkFrontmatter from "remark-frontmatter";
 import type { Root } from "mdast";
 
+/**
+ * 拆掉打包器的 default 包装，取回真正的插件函数。
+ *
+ * `remark-parse` / `remark-gfm` / `remark-frontmatter` 都是 ESM-only 包。
+ * tsup 打成 CJS 时，esbuild 会用 `__toESM(require(mod), 1)` 转换，而 `default`
+ * 这一项会停在「模块命名空间对象」上、不再往下取一层，于是 `.use()` 收到的是
+ * `{ default: 插件 }` 而不是插件本身，unified 直接抛：
+ *
+ *   Expected usable value but received an empty preset
+ *
+ * 这个错只在构建产物里出现（`tsx` 直跑源码、ESM 产物都正常），所以必须在这里兜住。
+ * 三种情形下都成立：源码里是函数、CJS 产物里是命名空间（取其 default）、
+ * 若上游某天改成 CJS 则原样返回。
+ */
+function asPlugin<T>(plugin: T): T {
+  const boxed = plugin as { default?: T } | null;
+  return boxed && typeof boxed === "object" && boxed.default ? boxed.default : plugin;
+}
+
 const processor = unified()
-  .use(remarkParse)
-  .use(remarkGfm)
-  .use(remarkFrontmatter, ["yaml"]);
+  .use(asPlugin(remarkParse))
+  .use(asPlugin(remarkGfm))
+  .use(asPlugin(remarkFrontmatter), ["yaml"]);
 
 export function parseMarkdown(markdown: string): Root {
   return processor.parse(protectMathEscapes(markdown));

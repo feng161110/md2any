@@ -8,73 +8,100 @@
 [![node](https://img.shields.io/badge/node-%3E%3D18-339933.svg?logo=node.js&logoColor=white)](https://nodejs.org)
 [![typescript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
-网页里写 Markdown 就能实时预览、按 A4 纸张分页排版，顺手导出成思维导图或文档；命令行同样支持批量转换与 `.xmind` 反向解析。
+在网页里写 Markdown 就能实时预览、按 A4 纸张分页排版，再导出成思维导图或文档 —— **不用装环境，也不用敲命令**。
 
-| 能力 | 说明 |
-| --- | --- |
-| **Markdown 预览与导出** | 三视图实时预览，导出所见即所得（核心功能） |
-| **多格式互转** | Markdown ↔ XMind / PNG / PDF / Markdown / JSON |
-| **双向工作流** | `.xmind` 也能反向导回 Markdown |
-| **双入口** | CLI 与网页共用同一套核心库 |
+命令行和「当库用」是同一套能力的另外两个入口，面向批量处理、自动化与二次开发，属于进阶用法。
+
+| 用法 | 面向谁 | 一句话 |
+| --- | --- | --- |
+| [网页端](#一网页端主推) | 所有人（推荐） | 打开即用，实时预览，导出所见即所得 |
+| [命令行](#二命令行进阶) | 批量 / 自动化 | 一条命令转一个文件，可接脚本与 CI |
+| [库调用](#三库调用进阶) | 二次开发 | 把转换能力嵌进自己的 Node 或前端项目 |
+
+三者共用同一套核心库，**转出来的结果完全一致**。
 
 设计原则：**解析（Markdown）与导出（格式）彻底解耦**，中间用一层格式无关的 IR（中间表示）衔接 —— 新增导出格式、渲染后端或输入源，都不必改动核心转换逻辑。
 
 ---
 
-## 功能
+## 一、网页端（主推）
 
-### 核心：Markdown 预览与导出
+### 能做什么
 
-左侧编辑、右侧预览，导出结果与预览一致：
+左侧写 Markdown，右侧实时预览，选好格式直接导出 —— **导出结果和预览一致**：
 
-| 预览视图 | 说明 | 可导出格式 |
+| 预览视图 | 长什么样 | 可导出格式 |
 | --- | --- | --- |
-| XMind 预览 | markmap 交互导图，鼠标 / 双指缩放平移 | XMind |
-| 导图预览 | 自绘画布，与 PNG / PDF 输出同源，逐像素一致 | XMind / PNG / PDF |
+| XMind 预览 | 可交互的思维导图，能缩放、拖动 | XMind |
+| 导图预览 | 自绘的导图画面，与最终图片逐像素一致 | XMind / PNG / PDF |
 | Markdown 预览 | A4 纸张分页排版，可手动增删分页 | Markdown / JSON |
 
-预览端完整支持标题、有序 / 无序 / 任务 / 嵌套列表、表格、引用、代码块（高亮 + 语言标签）、脚注、行内标记（`==高亮==`、`++插入++`、`^上标^`、`~~删除线~~`）、公式（MathJax）与图表（Mermaid / Markmap / Chart.js）。
+### 支持的语法
 
-还有：深色模式、移动端 / 平板适配、全屏、缩放、预览内单击定位到左侧对应行、拖拽 `.md` 文件导入。
+标题、有序 / 无序 / 任务 / 嵌套列表、表格、引用、代码块（高亮 + 语言标签）、脚注、链接、图片、Front-matter，行内标记 `==高亮==`、`++插入++`、`^上标^`、`~~删除线~~`，以及公式（MathJax）与图表（Mermaid / Markmap / Chart.js）。
 
-### 转换与导出
+### 三步用起来
 
-- **Markdown → `.xmind`**：标题层级与缩进列表自动转成导图层级，自动推断中心主题
-- **Markdown → PNG / PDF / Markdown / JSON**：`png` / `pdf` 为 Node 专属（Canvas + pdfkit）
-- **`.xmind` → Markdown**：新版 `content.json` 与 XMind 8 旧版 `content.xml` 都支持
-- **配色自定义**：中心主题与一级主题独立配色（CLI 参数 / 网页色轮）
+1. 打开页面（在线站点；或照下面「本地运行」自己起一个）
+2. 把 `.md` 文件拖进左侧，或直接在里面写 —— 点 `示例` 可以载入一份覆盖全部语法的演示文稿，当成模板改
+3. 右上角选好格式，点 `导出`，文件直接下载
 
-## 快速开始
+顺手的地方：深色模式、手机 / 平板自适应、全屏、缩放、在预览里点一下能跳到左侧对应行、`Ctrl / ⌘ + S` 直接导出。
 
-### 安装与构建
+### 本地运行
 
-仓库里**不含构建产物**，克隆后先装依赖并构建（CLI 入口就是构建出来的 `dist/cli.cjs`）：
+```bash
+npm install
+npm run dev:web
+```
+
+浏览器打开 **http://localhost:5173/md/** —— 末尾的 `/md/` 不能少（`web/vite.config.ts` 里 `base: "/md/"` 定的），直接开 `http://localhost:5173/` 会 404。
+
+### 自己部署
+
+```bash
+npm run build:web
+```
+
+产物在 `web/dist`，纯静态、没有后端依赖，丢到任意静态托管即可（站点同样要挂在 `/md/` 路径下）。
+
+> 响应式与触屏适配的取舍、被 iframe 嵌入时怎么让导出正常落地，见 **[web/README.md](web/README.md)**。
+
+---
+
+## 二、命令行（进阶）
+
+同样的转换能力，换成命令行调用。适合一次转很多文件、接进脚本或 CI。
+
+### 准备
+
+仓库里**不含构建产物**，先装依赖、构建一次：
 
 ```bash
 npm install
 npm run build
 ```
 
-### CLI
-
-构建完成后，三种用法任选：
-
-```bash
-node dist/cli.cjs ./note.md
-npm run dev -- ./note.md
-npm i -g .
-md2any ./note.md
-```
+### 三种用法
 
 | 用法 | 说明 |
 | --- | --- |
-| `node dist/cli.cjs` | 直接跑构建产物，最直观 |
-| `npm run dev --` | 用 `tsx` 直跑源码，改完即生效、免构建 |
-| `npm i -g .` | 装成全局命令，之后直接用 `md2any` |
+| `node dist/cli.cjs <文件>` | 直接跑构建产物，最直观 |
+| `npm run dev -- <文件>` | 用 `tsx` 直跑源码，改完即生效、免构建 |
+| `npm i -g .` 后 `md2any <文件>` | 装成全局命令，之后随处可用 |
 
-> `npx md2any` **暂时不可用**：包尚未发布到 npm；而且 npm 不会把「当前项目自己的 `bin`」链接进 `node_modules/.bin`，所以本地也解析不到。
+> `npx md2any` **暂时不可用**：包尚未发布到 npm；而且 npm 不会把「当前项目自己的 `bin`」链接进 `node_modules/.bin`，本地也解析不到。
 
-常用示例（默认输出 `.xmind`，与源文件同目录同名；下面用 `md2any` 指代，没做全局安装时把它换成 `node dist/cli.cjs`）：
+### 能转什么
+
+- **Markdown → `.xmind`**：标题层级与缩进列表自动转成导图层级，自动推断中心主题
+- **Markdown → PNG / PDF / Markdown / JSON**：`png` / `pdf` 需要 Canvas，只在 Node 侧可用
+- **`.xmind` → Markdown**：新版 `content.json` 与 XMind 8 旧版 `content.xml` 都支持
+- **配色自定义**：中心主题与一级主题独立配色
+
+### 常用示例
+
+默认输出 `.xmind`，与源文件同目录同名（下面用 `md2any` 指代，没做全局安装就换成 `node dist/cli.cjs`）：
 
 ```bash
 md2any ./note.md
@@ -85,7 +112,9 @@ md2any ./note.md --dry-run
 md2any ./out/note.xmind --reverse -o ./note.md
 ```
 
-上面依次是：默认转 `.xmind`、指定输出路径、替换中心主题名、导出 PNG（换成 `-f pdf` 即导出 PDF）、只打印 IR 不写文件、把 `.xmind` 反向转回 Markdown。
+依次是：默认转 `.xmind`、指定输出路径、替换中心主题名、导出 PNG（换成 `-f pdf` 即导出 PDF）、只打印 IR 不写文件、把 `.xmind` 反向转回 Markdown。
+
+### 参数
 
 | 参数 | 说明 |
 | --- | --- |
@@ -97,23 +126,9 @@ md2any ./out/note.xmind --reverse -o ./note.md
 | `--reverse` | 把 `.xmind` 反向转换为 Markdown |
 | `--dry-run` | 只打印 IR，不写文件 |
 
-### 网页端
+---
 
-```bash
-npm run dev:web
-```
-
-然后浏览器打开 **http://localhost:5173/md/** —— 注意末尾的 `/md/` 路径。这是 `web/vite.config.ts` 里 `base: "/md/"` 决定的，直接访问 `http://localhost:5173/` 会 404。
-
-构建静态产物（输出到 `web/dist`，可作纯前端站点直接部署，部署路径同样要对上 `/md/`）：
-
-```bash
-npm run build:web
-```
-
-界面细节、响应式与触屏适配、iframe 嵌入与宿主导出接管见 **[web/README.md](web/README.md)**。
-
-### 库使用
+## 三、库调用（进阶）
 
 ```ts
 import { convert, convertToIR, exportIR, parseXMind, irToMarkdown } from "md2any";
@@ -124,7 +139,11 @@ const json = await exportIR(ir, "json");                                  // IR 
 const md = irToMarkdown(await parseXMind(xmindBuffer));                   // .xmind → Markdown
 ```
 
+> 包尚未发布到 npm，本地项目可以先按路径引用：`"md2any": "file:../md2any"`（记得先 `npm run build`）。
+>
 > PNG / PDF 导出需要 Canvas 环境，从 `src/export/png.ts`、`src/export/pdf.ts` 单独导入（依赖 `@napi-rs/canvas`、`pdfkit`）。
+
+---
 
 ## 目录结构
 

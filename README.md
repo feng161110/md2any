@@ -1,8 +1,18 @@
 # md2xmind
 
+> **Markdown 一键转 XMind 思维导图**  
+> **版本：v1.0.0**
+
+[![version](https://img.shields.io/badge/version-1.0.0-blue.svg)](./package.json)
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+[![node](https://img.shields.io/badge/node-%3E%3D18-339933.svg?logo=node.js&logoColor=white)](https://nodejs.org)
+[![typescript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+
 把 Markdown 一键转换成 XMind 思维导图（`.xmind`），支持导出 PNG / PDF / Markdown / JSON，以及 `.xmind` 反向转回 Markdown。
 
 设计原则：**解析（Markdown）与导出（格式）彻底解耦**，中间用一层格式无关的 IR（中间表示）衔接——新增导出格式、渲染后端或输入源，都不必改动核心转换逻辑。
+
+---
 
 ## 特性
 

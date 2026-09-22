@@ -1,23 +1,23 @@
 {
-  "name": "md2xmind",
+  "name": "md2any",
   "version": "0.1.0",
-  "description": "Convert Markdown documents to XMind mind map files",
+  "description": "Markdown 转换 / 预览 / 导出工具：导出 XMind、PNG、PDF、Markdown、JSON",
   "author": "feng161110",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/feng161110/md.git"
+    "url": "git+https://github.com/feng161110/md2any.git"
   },
   "bugs": {
-    "url": "https://github.com/feng161110/md/issues"
+    "url": "https://github.com/feng161110/md2any/issues"
   },
-  "homepage": "https://github.com/feng161110/md#readme",
+  "homepage": "https://github.com/feng161110/md2any#readme",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "md2xmind": "./dist/cli.cjs"
+    "md2any": "./dist/cli.cjs"
   },
   "files": [
     "dist"

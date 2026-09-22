@@ -102,7 +102,7 @@ export function mdastToIR(
     }
   }
 
-  return postprocess({ sheets: [sheet], meta: { generator: "md2xmind" } }, options);
+  return postprocess({ sheets: [sheet], meta: { generator: "md2any" } }, options);
 }
 
 function imageMarkdown(images: ImageInfo[]): string {

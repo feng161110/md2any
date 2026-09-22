@@ -10,7 +10,7 @@ export async function irToPdf(ir: MindMapIR, options: PngOptions = {}): Promise<
     margin: 0,
     info: {
       Title: ir.sheets[0]?.root.title ?? "Mind Map",
-      Creator: "md2xmind",
+      Creator: "md2any",
     },
   });
 

@@ -32,7 +32,7 @@ function parseZen(content: string): MindMapIR {
       root: zenTopicToIr((sheet.rootTopic ?? {}) as Record<string, unknown>),
     };
   });
-  return { sheets, meta: { generator: "md2xmind" } };
+  return { sheets, meta: { generator: "md2any" } };
 }
 
 function zenTopicToIr(raw: Record<string, unknown>): TopicNode {
@@ -82,7 +82,7 @@ function parseLegacy(content: string): MindMapIR {
       root: topic ? legacyTopicToIr(topic) : { title: "" },
     };
   });
-  return { sheets, meta: { generator: "md2xmind" } };
+  return { sheets, meta: { generator: "md2any" } };
 }
 
 function legacyTopicToIr(raw: Record<string, unknown>): TopicNode {

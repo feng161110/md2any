@@ -120,8 +120,8 @@ describe("reverse conversion", () => {
 
   it("runs the CLI in reverse mode", () => {
     const stamp = Date.now();
-    const xmind = path.join(os.tmpdir(), "md2xmind-fwd-" + stamp + ".xmind");
-    const output = path.join(os.tmpdir(), "md2xmind-rev-" + stamp + ".md");
+    const xmind = path.join(os.tmpdir(), "md2any-fwd-" + stamp + ".xmind");
+    const output = path.join(os.tmpdir(), "md2any-rev-" + stamp + ".md");
     execSync(
       "npx tsx src/cli.ts test/fixtures/basic.md -o " + JSON.stringify(xmind),
       { cwd: projectRoot, stdio: "pipe" },

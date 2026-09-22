@@ -90,7 +90,7 @@ describe("xmind output", () => {
   });
 
   it("runs the CLI end to end", async () => {
-    const output = path.join(os.tmpdir(), "md2xmind-cli-" + Date.now() + ".xmind");
+    const output = path.join(os.tmpdir(), "md2any-cli-" + Date.now() + ".xmind");
     execSync("npx tsx src/cli.ts test/fixtures/basic.md -o " + JSON.stringify(output), { cwd: projectRoot, stdio: "pipe" });
     expect(fs.existsSync(output)).toBe(true);
     expect(fs.statSync(output).size).toBeGreaterThan(0);

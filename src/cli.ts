@@ -10,7 +10,7 @@ import { irToPng } from "./export/png.js";
 import { irToPdf } from "./export/pdf.js";
 import type { ExportFormat } from "./types.js";
 
-const cli = cac("md2xmind");
+const cli = cac("md2any");
 
 cli
   .command("<input>", "Convert a Markdown file to XMind (or back)")

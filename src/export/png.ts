@@ -27,7 +27,7 @@ const FONT_CANDIDATES = [
   "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
 ];
 
-const FONT_FAMILY = "md2xmind-cjk";
+const FONT_FAMILY = "md2any-cjk";
 let fontReady = false;
 
 export function ensureFont(): string {

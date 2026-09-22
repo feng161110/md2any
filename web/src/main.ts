@@ -1015,8 +1015,8 @@ function embedderDownloadPermission(): DownloadPermission {
  * 而宿主页面自己不在沙箱里，由它来保存是嵌入环境下唯一稳的路径。
  *
  * 协议（宿主页只需几行，见 README）：
- *   子 → 父：{ type: "md2xmind:download", name, mime, size, blob }
- *   父 → 子：{ type: "md2xmind:download:done", name }   // 拿到就回，表示已接管
+ *   子 → 父：{ type: "md2any:download", name, mime, size, blob }
+ *   父 → 子：{ type: "md2any:download:done", name }   // 拿到就回，表示已接管
  * 没回执（宿主页没实现）就返回 false，调用方继续走本地兜底。
  */
 function handOffToParent(blob: Blob, name: string): Promise<boolean> {
@@ -1031,12 +1031,12 @@ function handOffToParent(blob: Blob, name: string): Promise<boolean> {
     };
     const onMessage = (event: MessageEvent): void => {
       const data = event.data as { type?: string; name?: string } | null;
-      if (data && data.type === "md2xmind:download:done") finish(!data.name || data.name === name);
+      if (data && data.type === "md2any:download:done") finish(!data.name || data.name === name);
     };
     window.addEventListener("message", onMessage);
     try {
       window.parent.postMessage(
-        { type: "md2xmind:download", name, mime: blob.type, size: blob.size, blob },
+        { type: "md2any:download", name, mime: blob.type, size: blob.size, blob },
         embedderOrigin(),
       );
     } catch {
@@ -2372,7 +2372,7 @@ function updatePageCount(count: number): void {
 }
 
 /* ---- 右侧页面导航：跳页、插入分页、删除分页、折叠 ---- */
-const NAV_COLLAPSE_KEY = "md2xmind:nav-collapsed";
+const NAV_COLLAPSE_KEY = "md2any:nav-collapsed";
 
 function readNavCollapsed(): boolean {
   try {

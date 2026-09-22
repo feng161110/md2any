@@ -9,7 +9,7 @@ const projectRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), ".."
 
 describe("cli formats", () => {
   it("reverse-converts a legacy XMind 8 file back to markdown", () => {
-    const output = path.join(os.tmpdir(), "md2xmind-reverse-" + Date.now() + ".md");
+    const output = path.join(os.tmpdir(), "md2any-reverse-" + Date.now() + ".md");
     execSync(
       "npx tsx src/cli.ts test/fixtures/basic-legacy.xmind --reverse -o " +
         JSON.stringify(output),
@@ -22,7 +22,7 @@ describe("cli formats", () => {
   }, 180000);
 
   it("writes IR json with -f json", () => {
-    const output = path.join(os.tmpdir(), "md2xmind-json-" + Date.now() + ".json");
+    const output = path.join(os.tmpdir(), "md2any-json-" + Date.now() + ".json");
     execSync(
       "npx tsx src/cli.ts test/fixtures/basic.md -f json -o " + JSON.stringify(output),
       { cwd: projectRoot, stdio: "pipe" },
@@ -33,7 +33,7 @@ describe("cli formats", () => {
   }, 180000);
 
   it("writes a PNG image with -f png", () => {
-    const output = path.join(os.tmpdir(), "md2xmind-png-" + Date.now() + ".png");
+    const output = path.join(os.tmpdir(), "md2any-png-" + Date.now() + ".png");
     execSync(
       "npx tsx src/cli.ts test/fixtures/basic.md -f png -o " + JSON.stringify(output),
       { cwd: projectRoot, stdio: "pipe" },
@@ -44,7 +44,7 @@ describe("cli formats", () => {
   }, 180000);
 
   it("writes a real PDF document with -f pdf", () => {
-    const output = path.join(os.tmpdir(), "md2xmind-pdf-" + Date.now() + ".pdf");
+    const output = path.join(os.tmpdir(), "md2any-pdf-" + Date.now() + ".pdf");
     execSync(
       "npx tsx src/cli.ts test/fixtures/basic.md -f pdf -o " + JSON.stringify(output),
       { cwd: projectRoot, stdio: "pipe" },

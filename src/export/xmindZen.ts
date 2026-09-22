@@ -85,7 +85,7 @@ export function buildXMindFiles(
 ): Record<string, string> {
   const version = options.version ?? "0.1.0";
   const content = JSON.stringify(irToXMindContent(ir, options), null, 2);
-  const metadata = JSON.stringify({ creator: { name: "md2xmind", version } }, null, 2);
+  const metadata = JSON.stringify({ creator: { name: "md2any", version } }, null, 2);
   const manifest = JSON.stringify({
     "file-entries": {
       [XMIND_FILES.content]: {},
@@ -141,7 +141,7 @@ function topicToXMind(
 
 function buildStyle(style: TopicStyle, depth: number): XMindStyle {
   return {
-    id: depth === 0 ? "md2xmind-central" : "md2xmind-level-" + depth,
+    id: depth === 0 ? "md2any-central" : "md2any-level-" + depth,
     properties: {
       "svg:fill": style.fill,
       "color": style.color,

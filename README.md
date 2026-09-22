@@ -50,14 +50,25 @@
 
 ### 本地运行
 
+分两步，**必须分开执行**：第二步要用上第一步装好的依赖，依赖没装完就启动会直接报错。
+
+**第 1 步 · 安装依赖**（只有第一次需要，等它彻底跑完再往下）
+
 ```bash
 npm install
+```
+
+**第 2 步 · 启动开发服务器**
+
+```bash
 npm run dev:web
 ```
 
 浏览器打开 **http://localhost:5173/md/** —— 末尾的 `/md/` 不能少（`web/vite.config.ts` 里 `base: "/md/"` 定的），直接开 `http://localhost:5173/` 会 404。
 
 ### 自己部署
+
+同样要先完成上面的第 1 步（装好依赖），再执行：
 
 ```bash
 npm run build:web
@@ -75,10 +86,17 @@ npm run build:web
 
 ### 准备
 
-仓库里**不含构建产物**，先装依赖、构建一次：
+仓库里**不含构建产物**，先装依赖、再构建一次。两步同样**分开执行**，`npm run build` 要用到上一步装好的依赖。
+
+**第 1 步 · 安装依赖**（只有第一次需要，等它彻底跑完）
 
 ```bash
 npm install
+```
+
+**第 2 步 · 构建 CLI**
+
+```bash
 npm run build
 ```
 
@@ -173,6 +191,8 @@ IR → export/json → JSON
 ```
 
 ## 开发
+
+依赖装好后（`npm install`）可用这些命令：
 
 ```bash
 npm test

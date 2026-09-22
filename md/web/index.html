@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="把 Markdown 一键转换成 XMind 思维导图，可导出 XMind / PNG / PDF / Markdown / JSON" />
+    <meta name="theme-color" content="#f4f6fb" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e1622" media="(prefers-color-scheme: dark)" />
+    <title>md2xmind · Markdown 转思维导图</title>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="logo">md工具</span>
+          <span class="sub">Markdown → XMind / PNG / PDF</span>
+        </div>
+        <div class="actions">
+          <button id="pick-file" class="btn ghost" type="button" title="打开本地 Markdown 文件">
+            打开文件
+          </button>
+          <button id="load-sample" class="btn ghost" type="button" title="载入内置示例">
+            示例
+          </button>
+          <button id="download" class="btn primary" type="button" title="导出当前内容（Ctrl / ⌘ + S）">
+            <span class="spinner" aria-hidden="true"></span>
+            <span id="download-label">导出</span>
+          </button>
+        </div>
+      </header>
+
+      <input id="file-input" type="file" accept=".md,.markdown,.txt,text/markdown" hidden />
+
+      <nav class="mode-switch" id="mode-switch" aria-label="切换编辑与预览">
+        <button class="mode-btn active" data-mode="editor" type="button">编辑</button>
+        <button class="mode-btn" data-mode="preview" type="button">预览</button>
+      </nav>
+
+      <section class="toolbar" id="toolbar">
+        <button
+          class="toolbar-toggle"
+          id="toolbar-toggle"
+          type="button"
+          aria-expanded="true"
+          aria-controls="toolbar-body"
+        >
+          <span class="toolbar-toggle-label">导出设置</span>
+          <span class="toolbar-summary" id="toolbar-summary"></span>
+          <span class="toolbar-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="toolbar-body" id="toolbar-body">
+          <label class="field">
+            <span class="field-label">文件名</span>
+            <input id="file-name" type="text" placeholder="留空则用中心主题名" />
+          </label>
+          <label class="field">
+            <span class="field-label">导出格式</span>
+            <!-- data-paged：该格式在「Markdown 预览」下可用（那里导出的是分页纸张） -->
+            <span class="select-wrap">
+              <select id="format">
+                <option value="xmind">XMind 思维导图</option>
+                <option value="png" data-paged="true">PNG 图片</option>
+                <option value="pdf" data-paged="true" selected>PDF 文档</option>
+                <option value="markdown">Markdown</option>
+                <option value="json">JSON 结构</option>
+              </select>
+              <span class="select-arrow" aria-hidden="true"></span>
+              <!-- 自绘菜单：系统弹层样式不可控，这里补一层好看的；触屏仍用系统选择器 -->
+              <span class="select-menu" id="format-menu" hidden aria-hidden="true"></span>
+            </span>
+          </label>
+          <div class="palette-block" hidden>
+            <span class="field-label">配色（导图预览 / PNG / PDF）</span>
+            <div id="branch-swatches" class="swatches"></div>
+          </div>
+        </div>
+      </section>
+
+      <main class="workspace" id="workspace" data-mode="editor">
+        <section id="drop-zone" class="pane editor">
+          <div class="pane-head">
+            <span class="pane-title">Markdown 输入</span>
+            <span class="pane-note" id="editor-note">可以拖入 .md 文件到这里</span>
+          </div>
+          <textarea
+            id="markdown-input"
+            spellcheck="false"
+            placeholder="# 中心主题&#10;&#10;## 分支一&#10;&#10;- 要点&#10;- [ ] 待办"
+          ></textarea>
+        </section>
+
+        <section class="pane preview" id="preview-pane">
+          <div class="preview-tabs">
+            <div class="tab-list" role="tablist" aria-label="预览视图">
+              <button
+                id="tab-xmind"
+                class="tab active"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                aria-controls="view-xmind"
+              >
+                <span class="tab-label-full">XMind 预览</span>
+                <span class="tab-label-compact">XMind</span>
+              </button>
+              <button
+                id="tab-canvas"
+                class="tab"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="view-canvas"
+              >
+                <span class="tab-label-full">导图预览</span>
+                <span class="tab-label-compact">导图</span>
+              </button>
+              <button
+                id="tab-markdown"
+                class="tab"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="view-markdown"
+              >
+                <span class="tab-label-full">Markdown 预览</span>
+                <span class="tab-label-compact">Markdown</span>
+              </button>
+            </div>
+            <div class="preview-tools">
+              <span id="page-count" class="page-count" hidden></span>
+              <div class="tool-group" id="zoom-tools">
+                <button id="zoom-out" class="icon-btn" type="button" title="缩小" aria-label="缩小">−</button>
+                <button id="zoom-in" class="icon-btn" type="button" title="放大" aria-label="放大">＋</button>
+                <button id="zoom-fit" class="icon-btn" type="button" title="适应窗口" aria-label="适应窗口">⤢</button>
+                <span id="zoom-level" class="zoom-level">100%</span>
+              </div>
+              <button
+                id="fullscreen-toggle"
+                class="icon-btn bordered"
+                type="button"
+                title="全屏"
+                aria-label="全屏"
+              >
+                ⛶
+              </button>
+            </div>
+          </div>
+
+          <div class="preview-body">
+            <div
+              id="view-xmind"
+              class="view active"
+              role="tabpanel"
+              aria-labelledby="tab-xmind"
+              aria-hidden="false"
+            >
+              <svg id="mindmap-markmap"></svg>
+            </div>
+            <div
+              id="view-canvas"
+              class="view next"
+              role="tabpanel"
+              aria-labelledby="tab-canvas"
+              aria-hidden="true"
+            >
+              <canvas id="mindmap-canvas"></canvas>
+            </div>
+            <div
+              id="view-markdown"
+              class="view next"
+              role="tabpanel"
+              aria-labelledby="tab-markdown"
+              aria-hidden="true"
+            >
+              <article id="markdown-preview" class="md-body"></article>
+            </div>
+            <nav id="page-nav" class="page-nav" aria-label="页面导航" hidden>
+              <div class="page-nav-head">
+                <span class="page-nav-label">页面</span>
+                <button
+                  id="page-nav-toggle"
+                  class="page-nav-toggle"
+                  type="button"
+                  title="折叠页面导航"
+                  aria-label="折叠页面导航"
+                >
+                  ›
+                </button>
+              </div>
+              <div id="page-nav-list" class="page-nav-list"></div>
+            </nav>
+            <div class="empty-state" id="empty-state" hidden>
+              <div class="empty-icon">✎</div>
+              <p class="empty-title">还没有内容</p>
+              <p class="empty-desc">在左侧输入 Markdown，或拖入 / 打开一个 .md 文件</p>
+            </div>
+            <div class="page-dock" id="page-dock" hidden aria-label="分页导航">
+              <div id="page-dock-list" class="page-dock-list"></div>
+              <span class="page-dock-sep" aria-hidden="true"></span>
+              <div class="page-dock-actions">
+                <button
+                  id="page-dock-split"
+                  class="dock-btn"
+                  type="button"
+                  title="在当前页中间插入分页"
+                  aria-label="在当前页插入分页"
+                >
+                  ＋
+                </button>
+                <button
+                  id="page-dock-merge"
+                  class="dock-btn"
+                  type="button"
+                  title="删除当前页的分页，并入上一页"
+                  aria-label="删除当前页的分页"
+                >
+                  －
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="statusbar">
+        <span id="status" class="status">准备就绪</span>
+        <span class="status-hint">预览内单击可定位到左侧对应行</span>
+      </footer>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <div class="picker-modal save-modal" id="save-modal">
+      <div class="picker-panel save-panel" role="dialog" aria-modal="true" aria-label="导出文件">
+        <button class="close-btn" id="save-close" type="button" title="关闭" aria-label="关闭">✕</button>
+        <div class="picker-title" id="save-title">导出文件</div>
+        <p class="save-meta" id="save-meta"></p>
+        <div class="save-body" id="save-body"></div>
+        <p class="save-hint" id="save-hint"></p>
+        <div class="picker-actions">
+          <button class="btn" id="save-close-btn" type="button">关闭</button>
+          <button class="btn" id="save-copy" type="button" hidden>复制内容</button>
+          <button class="btn primary" id="save-download" type="button">下载文件</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="picker-modal" id="pickerModal">
+      <div class="picker-panel" role="dialog" aria-modal="true" aria-label="选择颜色">
+        <button class="close-btn" id="pickerCloseBtn" type="button" title="关闭" aria-label="关闭">✕</button>
+        <div class="picker-title">选择颜色</div>
+        <div class="color-circle-wrapper">
+          <div class="color-circle" id="colorCircle">
+            <canvas id="colorCircleCanvas" width="240" height="240"></canvas>
+            <div class="picker-handle" id="handle"></div>
+          </div>
+        </div>
+        <div class="lightness-row">
+          <span>明度</span>
+          <input id="lightnessRange" type="range" min="5" max="95" value="50" aria-label="明度" />
+        </div>
+        <div class="picker-preview">
+          <div class="picker-swatch" id="pickerSwatch"></div>
+          <div class="picker-hex" id="pickerHex">#000000</div>
+        </div>
+        <div class="picker-actions">
+          <button class="btn btn-picker-cancel" id="pickerCancelBtn" type="button">取消</button>
+          <button class="btn btn-picker-confirm" id="pickerConfirmBtn" type="button">确认</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

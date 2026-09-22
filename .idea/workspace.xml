@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a4b1fc37-8f69-4dbd-99f9-c0e1d3525562" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.npmrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cli.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/export/json.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/export/markdown.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/export/pdf.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/export/png.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/export/xmindZen.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/export/zip.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/import/xmind.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser/frontmatter.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser/parseMarkdown.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/render/draw.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/render/layout.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/render/mathSvg.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/render/mathText.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/colors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/presets.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transform/mdastToIR.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transform/postprocess.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transform/rules/block.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transform/rules/heading.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transform/rules/inline.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transform/rules/list.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transform/rules/position.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/cli.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/convert.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/basic-legacy.xmind" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/basic.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/comprehensive.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/long-paragraph.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/mixed.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/nested-list.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/no-h1.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/syntax-full.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/table.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/line.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/math-svg.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/math-text.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/pages.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/paragraph.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/parse-math.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/render.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/roundtrip.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/syntax.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/web-md.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/web.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsup.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/public/md2xmind-sample.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/diagrams.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/math-draw.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/md-extras.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/pages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/sample.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/vite.config.ts" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;feng161110&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/feng161110/md.git&quot;,
+    &quot;accountId&quot;: &quot;cb23c8b2-e8d3-4ea1-baea-fae6eb361d6e&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3Ja5XEm0xwthpAwDg6XRfxbn8y7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaScript 调试.index.html.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "D:/新建文件夹/桌面/Project/codex",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.test.executor": "Run",
+    "npm.test:e2e.executor": "Run",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "D:\\新建文件夹\\桌面\\Project\\codex\\md\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-WS-261.25134.101" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="a4b1fc37-8f69-4dbd-99f9-c0e1d3525562" name="更改" comment="" />
+      <created>1789886375826</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1789886375826</updated>
+      <workItem from="1789886376849" duration="58000" />
+      <workItem from="1789886448435" duration="7119000" />
+      <workItem from="1789895767196" duration="21016000" />
+      <workItem from="1789951540941" duration="44220000" />
+      <workItem from="1790004562433" duration="4316000" />
+      <workItem from="1790048022030" duration="47000" />
+      <workItem from="1790048097296" duration="5006000" />
+      <workItem from="1790058147637" duration="2544000" />
+      <workItem from="1790060750382" duration="37000" />
+      <workItem from="1790060836804" duration="358000" />
+      <workItem from="1790062931395" duration="3118000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="javascript:npm:vite" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

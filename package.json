@@ -1,6 +1,6 @@
 {
   "name": "md2any",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Markdown 转换 / 预览 / 导出工具：导出 XMind、PNG、PDF、Markdown、JSON",
   "author": "feng161110",
   "license": "MIT",

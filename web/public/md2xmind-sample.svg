@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="220" viewBox="0 0 640 220" role="img" aria-label="md2xmind 三层架构示意图">
+  <rect width="640" height="220" rx="12" fill="#f8fafc" />
+  <g font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" text-anchor="middle" font-size="15">
+    <rect x="36" y="26" width="568" height="46" rx="10" fill="#dbe7f5" stroke="#2e75b6" />
+    <text x="320" y="55" fill="#1f4e79">解析层：Markdown → IR（中间表示）</text>
+
+    <rect x="36" y="87" width="568" height="46" rx="10" fill="#e7f0e6" stroke="#9bbb59" />
+    <text x="320" y="116" fill="#40621c">中间表示：标题 / 列表 / 任务 / 表格 / 备注</text>
+
+    <rect x="36" y="148" width="568" height="46" rx="10" fill="#fbe9e7" stroke="#c0504d" />
+    <text x="320" y="177" fill="#8c2f2c">导出层：.xmind · JSON · Markdown · PNG · PDF</text>
+  </g>
+  <g stroke="#94a3b8" stroke-width="1.5" fill="none">
+    <path d="M320 72 L320 87" marker-end="url(#arrow)" />
+    <path d="M320 133 L320 148" marker-end="url(#arrow)" />
+  </g>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8" />
+    </marker>
+  </defs>
+</svg>

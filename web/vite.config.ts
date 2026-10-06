@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+﻿import { defineConfig } from "vite";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -8,7 +8,7 @@ const projectDir = path.resolve(configDir, "..");
 
 export default defineConfig({
   root: rootDir,
-  base: "/md/",
+  base: "/",
   resolve: {
     alias: {
       "@core": path.join(projectDir, "src"),
@@ -21,8 +21,8 @@ export default defineConfig({
     port: 5173,
     open: false,
   },
-  // markdown-it-mathjax3 的浏览器产物含顶层 await，
-  // dev 预构建（optimizeDeps）与源码转换（esbuild.target）都要放宽到 es2022
+  // markdown-it-mathjax3 鐨勬祻瑙堝櫒浜х墿鍚《灞?await锛?
+  // dev 棰勬瀯寤猴紙optimizeDeps锛変笌婧愮爜杞崲锛坋sbuild.target锛夐兘瑕佹斁瀹藉埌 es2022
   esbuild: {
     target: "es2022",
   },
@@ -37,3 +37,4 @@ export default defineConfig({
     target: "es2022",
   },
 });
+
